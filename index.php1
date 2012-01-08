@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <style type='text/css'>
+            #comments {
+                border: 1px solid grey;
+                margin-top: 10px;
+            }
+            form {
+                margin: 10px;
+                display: none;
+            }
+
+            p span {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <p>
+        <?php
+            $string = "Hello, world!";
+
+            $string = explode( " ", $string );
+
+            foreach( $string as $value ) {
+                echo "<span>" . $value . "</span> ";
+            }
+        ?>
+        <p>
+
+        <div id='comments'>
+        </div>
+        <input id='word'type='hidden' value='' />
+        <form>
+            <input type='text' />
+            <input type='submit' />
+        </form>
+    </body>
+</html>
