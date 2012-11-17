@@ -1,9 +1,9 @@
 <?php
     return array(
         'db' => array(
-            'user' => 'user',
-            'password' => 'pass',
-            'name' => 'name'
+            'user' => 'librarium',
+            'password' => 'librarium',
+            'name' => 'librarium'
         ),
         'url' => 'http://themicp.com/librarium/'
     );

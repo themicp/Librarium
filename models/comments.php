@@ -1,5 +1,4 @@
 <?php
-    include "db.php";
     class Comment {
         public function save( $word, $text ) {
             db( "INSERT INTO

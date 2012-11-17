@@ -11,7 +11,6 @@
         public static function listing( $initial = "true" ) {
             $books = Book::listing();
 
-            $initial = ( $initial == 'true' || $initial == NULL ? true : false );
             view( 'book/listing', compact( "books" ), $initial );
         }
         public static function item( $id ) {
