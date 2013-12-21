@@ -1,32 +1,37 @@
 var edit = 0;
 var word;
 
-$( document ).click( function() {
+function save( e ) {
     $( "#bubble" ).css( "display", "none" );
 
     var comment = $( "#comment input" ).val();
 
-    if ( word == "" ) {
-        console.log( "dfsdfsdf" );
+    if ( word == "" || word == undefined ) {
+        console.log( "empty string" );
         return false;
     }
 
+    $( "#text" ).css( "color", "grey" );
+    $( "#disable" ).show();
     $.post( "comment/update", {
         word: word,
         text: comment
     }, function( response ) {
-        console.log( response );
+        console.log( "Word - " + word );
         word = "";
+        $( "#disable" ).hide();
+        $( "#text" ).css( "color", "black" );
+        if ( e != undefined ) {
+            bubble( e );
+        }
     } );
-} );
+}
 
-$( "#bubble" ).bind( "click", function( e ) { e.stopPropagation(); } );
-
-$( "#text span" ).bind( "click", function( e ) {
-    var offset = $( this ).offset();
-    word = $( this ).text();
+function bubble( e ) {
+    var offset = $( e ).offset();
+    word = $( e ).text();
     $.post( 'comment/view', {
-        word: $( this ).text()
+        word: $( e ).text()
     }, function( response ) {
         $( "#bubble" ).show();
         $( "#comment" ).html( response );
@@ -40,6 +45,35 @@ $( "#text span" ).bind( "click", function( e ) {
         }
     } );
 
+}
+
+$( document ).bind( "click", function() {
+    save();
+    $( "#dict" ).hide();
+} );
+
+$( "#bubble" ).bind( "click", function( e ) { e.stopPropagation(); } );
+
+$( "#text span" ).bind( "click", function( e ) {
+    if ( word != "" && word != undefined ) {
+        save( this );
+    }
+    else {
+        bubble( this );
+    }
+    return false;
+} );
+
+$( "#text span" ).bind( 'contextmenu', function( e ) {
+    var word = this.innerText;
+    var pattern = /[a-z|A-Z|\ ]/g;
+    var offset = $( this ).offset();
+    word = word.match( pattern );
+    word = word.join( "" );
+    $( "#dict a" ).attr( "href", dict + word.toLowerCase() );
+    $( "#dict" ).css( "left", offset.left + "px" );
+    $( "#dict" ).css( "top", offset.top*1 + 20*1 + "px" );
+    $( "#dict" ).show();
     return false;
 } );
 
@@ -56,8 +90,6 @@ $( "form" ).submit( function() {
         }, function( response ) {
             $( "#comments" ).text( response );
         } );
-
-        console.log( response );
     } );
 
     return false;

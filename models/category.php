@@ -1,42 +1,40 @@
 <?php
-    class Book {
-        public static function create( $title, $text, $category ) {
+    class Category {
+        public static function create( $title, $dict ) {
             return db( "INSERT INTO
-                    books
+                    categories
                 SET
                     title = :title,
-                    text = :text,
-                    category = :category
-                    ", compact( 'title', 'text', 'category' ) );
+                    dictionary = :dict
+                    ", compact( 'title', 'dict' ) );
         }
         public static function item( $id ) {
-            return db_select( "books", compact( "id" ) );
+            return db_select( "categories", compact( "id" ) );
         }
         public static function listing() {
             $res = db( "
                 SELECT
                     *
                 FROM
-                    books
+                    categories
                 ");
             return db_fetch( $res );
         }
-        public static function update( $title, $text, $category, $id ) {
+        public static function update( $title, $dict, $id ) {
             return db( "UPDATE
-                    books
+                    categories
                 SET
                     title = :title,
-                    text = :text,
-                    category = :category
+                    dictionary = :dict
                 WHERE
                     id = :id
                 LIMIT 1
-                    ", compact( 'title', 'text', 'category', 'id' ) );
+                    ", compact( 'title', 'dict', 'id' ) );
         }
         public static function delete( $id ) {
             return db( "DELETE
                         FROM
-                            books
+                            categories
                         WHERE
                             id = :id
                         LIMIT 1

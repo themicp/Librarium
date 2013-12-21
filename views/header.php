@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Librarium</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <base href="<?php
         global $settings;
         echo $settings[ 'url' ];

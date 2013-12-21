@@ -10,6 +10,8 @@
             </div>
             <div id='preview'>
                 <input type='text' value='' />
+                <select>
+                </select>
                 <textarea></textarea>
                 <div id='book_options'>
                     <a href='#' id='book_save' >Save</a>
@@ -29,8 +31,21 @@
                     $( "#added" ).html( response );
                 } );
             }
+            function loadCategories() {
+                $.post( 'category/listing', {
+                }, function( response ) {
+                    response = JSON.parse( response );
+                    for ( var i = 0; i < response.length; ++i ) {
+                        $( '#preview select' ).append( $( '<option>' ).attr( {
+                            id: 'cat' + response[ i ].id,
+                            value: response[ i ].id
+                        } ).text( response[ i ].title ) );
+                    }
+                } );
+            }
 
             loadBooks();
+            loadCategories();
         </script>
 <?php
     include '../views/admin/footer.php';

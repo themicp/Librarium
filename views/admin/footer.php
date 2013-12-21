@@ -28,6 +28,7 @@
                 saveId = 0;
                 $( "#preview input" ).val( "New title" );
                 $( "#preview textarea" ).val( "" );
+                $( "#preview select option" ).removeAttr( 'selected' );
                 return false;
             } );
 
@@ -39,9 +40,12 @@
                 }, function( response ) {
                     var title = response.split( "@@" )[ 0 ];
                     var text = response.split( "@@" )[ 1 ];
+                    var catId = response.split( "@@" )[ 2 ];
 
                     $( "#preview input" ).val( title );
                     $( "#preview textarea" ).val( text );
+                    $( "#preview select option" ).removeAttr( 'selected' );
+                    $( "#preview select option#cat" + catId ).attr( "selected", "1" );
                 } );
 
                 return false;
@@ -50,12 +54,14 @@
             $( "#preview #book_save" ).click( function() {
                 var title = $( "#preview input" ).val();
                 var text = $( "#preview textarea" ).val();
+                var category = $( "#preview select" ).val();
                 $( "#overlay" ).show();
 
                 if ( saveId == 0 ) {
                     $.post( 'book/create', {
                         title: title,
-                        text: text
+                        text: text,
+                        category: category
                     }, function( response ) {
                         loadBooks();
                         $( "#overlay" ).hide();
@@ -65,6 +71,7 @@
                     $.post( 'book/update', {
                         title: title,
                         text: text,
+                        category: category,
                         id: saveId
                     }, function( response ){ 
                         loadBooks();

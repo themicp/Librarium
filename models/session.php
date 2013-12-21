@@ -1,8 +1,8 @@
 <?php
     class Session {
         public static function create( $user, $pass ) {
-            if ( $user == 'user' && $pass == 'pass' ) {
-                $_SESSION[ 'admin' ] = 'user';
+            if ( $user == 'librarium' && $pass == 'szindros' ) {
+                $_SESSION[ 'admin' ] = 'szindros';
             }
             return isset( $_SESSION[ 'admin' ] );
         }

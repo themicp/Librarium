@@ -1,7 +1,7 @@
 <?php
-    include "db.php";
+    require_once( "db.php" );
     class Comment {
-        public function save( $word, $text ) {
+        public static function save( $word, $text ) {
             db( "INSERT INTO
                     comments
                 SET
@@ -11,7 +11,7 @@
                     text = :text", compact( 'word', 'text' ) );
         }
 
-        public function item( $word ) {
+        public static function item( $word ) {
             return db_select( "comments", compact( "word" ) );
         }
     }
