@@ -6,7 +6,7 @@
                 $text = htmlspecialchars( $text );
 
                 $word = strtolower( $word );
-                $word = preg_replace( "#[^a-z]#", "", $word ); 
+                $word = preg_replace( "#[,+\"\]\[\]\.]#", "", $word ); 
 
                 Comment::save( $word, $text );
             }

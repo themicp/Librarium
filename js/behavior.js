@@ -47,7 +47,10 @@ function bubble( e ) {
 
 }
 
-$( document ).bind( "click", function() {
+$( document ).bind( "click", function( e ) {
+    if ( e.which == 3 ) { //cancel the event if it occurs from a right click
+        return false;
+    }
     save();
     $( "#dict" ).hide();
 } );
@@ -65,7 +68,7 @@ $( "#text span" ).bind( "click", function( e ) {
 } );
 
 $( "#text span" ).bind( 'contextmenu', function( e ) {
-    var word = this.innerText;
+    var word = $( this ).text();
     var pattern = /[a-z|A-Z|\ ]/g;
     var offset = $( this ).offset();
     word = word.match( pattern );
