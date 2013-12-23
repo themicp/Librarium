@@ -5,6 +5,7 @@ function save( e ) {
     $( "#bubble" ).css( "display", "none" );
 
     var comment = $( "#comment input" ).val();
+    $( "#comment input" ).val( '' );
 
     if ( word == "" || word == undefined ) {
         console.log( "empty string" );
