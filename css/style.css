@@ -32,11 +32,16 @@ body {
 #list_home {
     display: block;
     margin: 10px auto 0 auto;
-    width: 500px;
+    width: 520px;
 }
 
 #list_home h1 {
     text-align: center;
+}
+#list_home > span {
+    text-align: center;
+    font-size: 15px;
+    display: block;
 }
 
 .book_list {
