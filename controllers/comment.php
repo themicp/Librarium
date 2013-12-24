@@ -6,7 +6,7 @@
                 $text = htmlspecialchars( $text );
 
                 $word = strtolower( $word );
-                $word = preg_replace( "#[,+\"\]\[\]\.]#", "", $word ); 
+                $word = preg_replace( "#[,+\"\]\[\]\.\;\!]#", "", $word ); 
 
                 Comment::save( $word, $text );
             }
@@ -14,7 +14,7 @@
 
         public static function view( $word ) {
             $word = strtolower( $word );
-            $word = preg_replace( "#[^a-z]#", "", $word ); 
+            $word = preg_replace( "#[,+\"\]\[\]\.\;\!]#", "", $word ); 
 
             $comment = Comment::item( $word );
 

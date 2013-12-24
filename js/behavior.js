@@ -69,12 +69,10 @@ $( "#text span" ).bind( "click", function( e ) {
 } );
 
 $( "#text span" ).bind( 'contextmenu', function( e ) {
-    var word = $( this ).text();
-    var pattern = /[a-z|A-Z|\ ]/g;
+    var word = $( this ).text().toLowerCase();
     var offset = $( this ).offset();
-    word = word.match( pattern );
-    word = word.join( "" );
-    $( "#dict a" ).attr( "href", dict + word.toLowerCase() );
+    var word = word.replace( /[,+\"\[\]\.\;\!]/g, '' );
+    $( "#dict a" ).attr( "href", dict + word );
     $( "#dict" ).css( "left", offset.left + "px" );
     $( "#dict" ).css( "top", offset.top*1 + 20*1 + "px" );
     $( "#dict" ).show();
